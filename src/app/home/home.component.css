@@ -1,0 +1,9 @@
+  
+  .jumbotron {  
+    background-image: url('/assets/example/background.jpg');
+    background-repeat: no-repeat;
+    color:rgb(0, 2, 109);
+    
+    font-family: fantasy;
+    margin-top: 5px;
+}

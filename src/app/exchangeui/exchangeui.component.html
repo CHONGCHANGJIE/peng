@@ -1,0 +1,50 @@
+
+<form  [formGroup]="form" (ngSubmit)= "submit()">
+
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+
+            <mat-form-field >
+                <mat-select   required 
+                                class="form-control" 
+                                formControlName="currencyselection" 
+                                type="text"
+                                id="currencyselection"
+                                >
+                <mat-option *ngFor="let currency of currencies" [value]="currency.value">{{ currency.viewValue }}</mat-option>
+                </mat-select>
+                <mat-label><mat-icon>favorite</mat-icon> <b> Currency</b> </mat-label>
+               </mat-form-field>
+        </div>
+
+
+            <mat-form-field style ="padding-left:20px" [floatLabel]="form.value.floatLabel">
+                <mat-label>Request amount</mat-label>
+                <input required
+                      matInput class="form-control"
+                      formControlName="exchangeamount"
+                      type="number" 
+                      id="exchangeamount"
+                      aria-label="Amount (to the nearest dollar)">
+              </mat-form-field>
+
+</div>
+<div class="input-group mb-3" style="font-family: monospace">
+    <div style="padding-right: 30px">Exchange Rate</div>
+    <div *ngIf= "form.value.currencyselection=='my-tw'">{{myr/twd}}</div>
+    <div *ngIf= "form.value.currencyselection=='tw-my'">{{twd/myr}}</div>
+</div>
+
+<div class="input-group mb-3" style="font-family: monospace ">
+  <div style="padding-right: 100px">
+      <div *ngIf= "form.value.currencyselection=='my-tw'">MYR<span class="flag-icon flag-icon-my flag-icon-squared"></span></div>
+      <div *ngIf= "form.value.currencyselection=='tw-my'">TWD<span class="flag-icon flag-icon-tw flag-icon-squared"></span></div>
+  </div>
+
+    <div *ngIf= "form.value.currencyselection=='my-tw'">{{form.value.exchangeamount* myr/twd}}</div>
+    <div *ngIf= "form.value.currencyselection=='tw-my'">{{form.value.exchangeamount* twd/myr}}</div>
+</div>
+    <button  class="btn btn-lg btn-primary btn-block" type="submit">Exchange</button>
+        
+</form>

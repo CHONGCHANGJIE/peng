@@ -5,14 +5,15 @@
     <div class="input-group mb-3">
         <div class="input-group-prepend">
 
-            <mat-form-field >
+            <mat-form-field style ="padding-left:20px">
                 <mat-select   required 
                                 class="form-control" 
                                 formControlName="currencyselection" 
                                 type="text"
                                 id="currencyselection"
-                                >
-                <mat-option *ngFor="let currency of currencies" [value]="currency.value">{{ currency.viewValue }}</mat-option>
+                               >
+                <mat-option>--</mat-option>
+                <mat-option *ngFor="let currency of currencyselections" [value]="currency">{{ currency.viewValue }}</mat-option>
                 </mat-select>
                 <mat-label><mat-icon>favorite</mat-icon> <b> Currency</b> </mat-label>
                </mat-form-field>
@@ -26,25 +27,30 @@
                       formControlName="exchangeamount"
                       type="number" 
                       id="exchangeamount"
-                      aria-label="Amount (to the nearest dollar)">
+                      aria-label="Amount (to the nearest dollar)"
+                      >
               </mat-form-field>
 
 </div>
 <div class="input-group mb-3" style="font-family: monospace">
-    <div style="padding-right: 30px">Exchange Rate</div>
-    <div *ngIf= "form.value.currencyselection=='my-tw'">{{myr/twd}}</div>
-    <div *ngIf= "form.value.currencyselection=='tw-my'">{{twd/myr}}</div>
+    <div style="padding-right: 50px">Exchange Rate</div>
+    <div *ngIf= "form.value.currencyselection.value=='my-tw'">{{myrtwd | number: '1.3-3'}}</div>
+    <div *ngIf= "form.value.currencyselection.value=='tw-my'">{{twdmyr | number: '1.2-2'}}</div>
 </div>
 
 <div class="input-group mb-3" style="font-family: monospace ">
-  <div style="padding-right: 100px">
-      <div *ngIf= "form.value.currencyselection=='my-tw'">MYR<span class="flag-icon flag-icon-my flag-icon-squared"></span></div>
-      <div *ngIf= "form.value.currencyselection=='tw-my'">TWD<span class="flag-icon flag-icon-tw flag-icon-squared"></span></div>
+<div>I need to pay   </div>
+  <div style="padding-left: 40px">
+      <div *ngIf= "form.value.currencyselection.value=='my-tw'"><span class="flag-icon flag-icon-my flag-icon-squared"></span>  RM</div>
+      <div *ngIf= "form.value.currencyselection.value=='tw-my'"><span class="flag-icon flag-icon-tw flag-icon-squared"></span>  NTD</div>
   </div>
 
-    <div *ngIf= "form.value.currencyselection=='my-tw'">{{form.value.exchangeamount* myr/twd}}</div>
-    <div *ngIf= "form.value.currencyselection=='tw-my'">{{form.value.exchangeamount* twd/myr}}</div>
+    <div *ngIf= "form.value.currencyselection.value=='my-tw'">{{form.value.exchangeamount* myr/twd | number: '1.0-0'}}</div>
+    <div *ngIf= "form.value.currencyselection.value=='tw-my'">{{form.value.exchangeamount* twd/myr | number: '1.0-0'}}</div>
 </div>
     <button  class="btn btn-lg btn-primary btn-block" type="submit">Exchange</button>
-        
+
+
 </form>
+<!-- <p>{{form.get('currencyselection').value | json}}</p>
+<p>{{form.get('exchangeamount').value | json}}</p> -->

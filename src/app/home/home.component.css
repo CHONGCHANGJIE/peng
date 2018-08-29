@@ -2,8 +2,24 @@
   .jumbotron {  
     background-image: url('/assets/example/background.jpg');
     background-repeat: no-repeat;
-    color:rgb(0, 2, 109);
     
-    font-family: fantasy;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     margin-top: 5px;
+    font-weight: bold;
+    font-stretch: extra-condensed;
+}
+
+.bg-info{
+  color: bisque;
+  font-family: georgia;
+
+   
+  }
+
+
+#slogan {
+  color: rgb(241, 133, 0);
+  font-size: 40px;
+
+   
 }

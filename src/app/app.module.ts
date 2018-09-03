@@ -14,6 +14,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { MaterialModule } from './material/material.module';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireStorageModule } from 'angularfire2/storage';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { environment } from '../environments/environment';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +29,8 @@ import { MaterialModule } from './material/material.module';
     TopbarComponent,
     ExchangeuiComponent,
     LoginComponent,
-    HelpComponent
+    HelpComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -34,8 +41,12 @@ import { MaterialModule } from './material/material.module';
     AppRoutingModule,
     HttpClientModule,
     FlashMessagesModule.forRoot(),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
+    AngularFireStorageModule
   ],
-  providers: [],
+  providers: [LoginComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

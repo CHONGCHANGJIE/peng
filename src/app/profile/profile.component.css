@@ -1,12 +1,3 @@
-.username {
-    display:block;
-    padding:.5rem 1rem;
-    color: thistle;
-    text-decoration: aquamarine;
-    font-family: fantasy;
-    text-transform: capitalize;
-}
-
 .loading {
     position: fixed;
     left:30px;
@@ -19,7 +10,6 @@
 
 
 }
-
 
 
 .loader {

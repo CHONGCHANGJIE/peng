@@ -1,6 +1,9 @@
-import { LoginComponent } from './../login/login.component';
+import { Observable } from 'rxjs';
+import { AuthService } from './../services/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { FlashMessagesService} from 'angular2-flash-messages';
+import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-navbar',
@@ -9,33 +12,29 @@ import { FlashMessagesService} from 'angular2-flash-messages';
 })
 export class NavbarComponent implements OnInit {
   isLoading = true;
-  username;
+  isLoggedIn$: Observable<boolean>;
 
-  constructor(private flashMessage: FlashMessagesService, private lg: LoginComponent){}
+  constructor(  private authService: AuthService, private _router: Router) {}
 
   ngOnInit() {
-    this.isLoading = true;
 
-    this.lg.af.user.subscribe(user => {
+    this.isLoggedIn$ = this.authService.isLoggedIn;
+    this.authService.user.subscribe(user => {
       if (user) {
-        this.username = user.displayName;
-        this.isLoading = false;
+        this.authService.loggedIn.next(true);
         return;
       }
-        this.username = null;
 
-        this.isLoading = false;
     });
   }
 
   logout() {
-    this.lg.af.auth.signOut().then(function() {
-      console.log('Sign-out successful');
-    }).catch(function(error) {
-      console.log('An error happened.');
-
+    this.authService.logout();
+    this.authService.user.subscribe(user => {
+      if (!user) {
+        this._router.navigate(['']);
+      }
     });
-    this.flashMessage.show('Logged-out.', { cssClass: 'alert-danger', timeout: 1500 });
 
   }
 }

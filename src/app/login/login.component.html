@@ -1,15 +1,13 @@
 
 <body style="text-align:center; padding:1em">
-  <h1>{{displayName}}</h1>
-  <img *ngIf ="photoURL" src = "{{ photoURL }}" alt ="">
   <br>
   <br>
-	<div *ngIf = "!af.auth.currentUser" class="btn-group">
+	<div *ngIf = "!(authService.user | async)" class="btn-group">
 		<a class='btn btn-danger disabled'><i class="fa fa-google-plus" style="width:16px; height:20px"></i></a>
 		<a class='btn btn-danger' (click)='glogin()'  style="width:12em;"> Sign in with Google</a>
 	</div>
 	<br /><br />
-	<div *ngIf = "!af.auth.currentUser" class="btn-group">
+	<div *ngIf = "!(authService.user | async)" class="btn-group">
 		<a class='btn btn-primary disabled'><i class="fa fa-facebook" style="width:16px; height:20px"></i></a>
 		<a class='btn btn-primary ' (click)='login()'  style="width:12em"> Sign in with Facebook</a>
 	</div>	

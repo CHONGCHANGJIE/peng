@@ -10,18 +10,18 @@
     <a class="navbar-brand" href="/">PengPay</a>
     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
       <li class= "nav-item">
-          <a routerLink="profile" class="username"  >{{username}}<span class="sr-only"></span></a>
+          <a routerLink="profile" *ngIf="isLoggedIn$ | async" class="nav-link username"  >{{ (authService.user | async)?.email | uppercase }}<span class="sr-only"></span></a>
       </li>
       <li class="nav-item" [routerLinkActive] = "['active']"  
       [routerLinkActiveOptions]="{exact:true}"  >
         <a routerLink="" class="nav-link" >Home <span class="sr-only"></span></a>
       </li>
 
-      <li *ngIf = "!lg.af.auth.currentUser" class="nav-item" [routerLinkActive] = "['active']">
+      <li *ngIf="!(isLoggedIn$ | async)" class="nav-item" [routerLinkActive] = "['active']">
           <a routerLink="login" class="nav-link"  >Login/Register <span class="sr-only"></span></a>
         </li>
-      <li *ngIf = "lg.af.auth.currentUser" class="nav-item" [routerLinkActive] = "['active']">
-          <a routerLink="login" class="nav-link" (click)="logout()"  >Logout <span class="sr-only"></span></a>
+      <li *ngIf="isLoggedIn$ | async"  class="nav-item" [routerLinkActive] = "['active']">
+          <a  class="nav-link" style="cursor: pointer;" (click)="logout()"  >Logout <span class="sr-only"></span></a>
         </li>
         
       <li class="nav-item dropdown">

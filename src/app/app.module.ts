@@ -20,6 +20,8 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 import { ProfileComponent } from './profile/profile.component';
+import { LoadingSpinnerComponent } from './item/ui/loading-spinner/loading-spinner.component';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { ProfileComponent } from './profile/profile.component';
     ExchangeuiComponent,
     LoginComponent,
     HelpComponent,
-    ProfileComponent
+    ProfileComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +49,7 @@ import { ProfileComponent } from './profile/profile.component';
     AngularFireAuthModule,
     AngularFireStorageModule
   ],
-  providers: [LoginComponent],
+  providers: [LoginComponent, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

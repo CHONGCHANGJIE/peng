@@ -1,5 +1,6 @@
+import { AuthService } from './../services/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { LoginComponent } from '../login/login.component';
+
 
 @Component({
   selector: 'app-profile',
@@ -11,11 +12,11 @@ export class ProfileComponent implements OnInit {
   photoURL;
   isLoading = true;
 
-  constructor(private lg: LoginComponent) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
-
-    this.lg.af.user.subscribe(user => {
+    this.isLoading = true;
+    this.authService.user.subscribe(user => {
       if (user) {
         this.username = user.displayName;
         this.photoURL = user.photoURL;
@@ -24,7 +25,8 @@ export class ProfileComponent implements OnInit {
       }
       this.username = null;
       this.photoURL = null;
-      this.isLoading = false;
+
+
     });
   }
 

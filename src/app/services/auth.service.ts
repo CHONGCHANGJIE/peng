@@ -45,7 +45,7 @@ export class AuthService {
       this.af
       .auth.signInWithEmailAndPassword(email, password)
       .then (value => {
-        console.log('Nice, it worked!');
+        console.log('Nice, it worked!', value);
         this.loggedIn.next(true);
       })
       .catch(err => {

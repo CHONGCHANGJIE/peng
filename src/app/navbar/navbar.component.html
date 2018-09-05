@@ -20,9 +20,7 @@
       <li *ngIf="!(isLoggedIn$ | async)" class="nav-item" [routerLinkActive] = "['active']">
           <a routerLink="login" class="nav-link"  >Login | Sign-Up <span class="sr-only"></span></a>
         </li>
-      <li *ngIf="isLoggedIn$ | async"  class="nav-item" [routerLinkActive] = "['active']">
-          <a  class="nav-link" style="cursor: pointer;" (click)="logout()"  >Logout <span class="sr-only"></span></a>
-        </li>
+
         
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -38,6 +36,10 @@
       <li class="nav-item " [routerLinkActive] = "['active']">
           <a routerLink="help" class="nav-link"  >Help <span class="sr-only"></span></a>
       </li>
+
+      <li *ngIf="isLoggedIn$ | async"  class="nav-item" [routerLinkActive] = "['active']">
+          <a  class="nav-link" style="cursor: pointer;" (click)="logout()"  >Logout <span class="sr-only"></span></a>
+        </li>
     </ul>
   </div>
 </nav>

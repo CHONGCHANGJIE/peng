@@ -1,77 +1,100 @@
 
-
-<body style="text-align:center; padding:1em">
-		<div *ngIf = "!(authService.user | async)" class="btn-group">
-				<a class='btn btn-danger disabled'><i class="fa fa-google-plus" style="width:16px; height:20px"></i></a>
-				<a class='btn btn-danger' (click)='glogin()'  style="width:12em;"> Sign in with Google</a>
-			</div>
-			<br /><br />
-			<div *ngIf = "!(authService.user | async)" class="btn-group">
-				<a class='btn btn-primary disabled'><i class="fa fa-facebook" style="width:16px; height:20px"></i></a>
-				<a class='btn btn-primary ' (click)='login()'  style="width:12em"> Sign in with Facebook</a>
-			</div>	
-			<br /><br />
-
-		<div class="container">
-					<div class=" loginform">
-							<form [formGroup]="form" class="form-signin">
-									<div class="text-center mb-4">
-										<h1 class="h3 mb-3 font-weight-normal">Login with Email</h1>
-										<p></p>
-									</div>
-								
-									<div class="form-label-group">
-										<input
-												formControlName="email" 
-												type="email" 
-												id="inputEmail" 
-												class="form-control" 
-												placeholder="Email address" 
-												>
-												<div *ngIf="email.touched && email.invalid" class="alert alert-danger">
-													<div *ngIf= "email.errors.required">Email is required</div>
-													<div *ngIf= "email.errors.email && !email.value.length==0">Email is invalid</div>
-								
-												</div>
-										<label for="inputEmail">Email address</label>
-									</div>
-								
-									<div class="form-label-group">
-										<input 
-												formControlName="password"
-												type="password" 
-												id="inputPassword" 
-												class="form-control" 
-												placeholder="Password" 
-												>
-												<div *ngIf="password.touched && password.invalid" class="alert alert-danger">
-													<div *ngIf= "password.errors.required">Password is required</div>
-													<div *ngIf= "password.errors.cannotContainSpace">Password can not contain space.</div>
-													<div *ngIf="password.errors.minlength">Password should be minimum {{password.errors.minlength.requiredLength}} characters</div>
-												</div>
-										<label for="inputPassword">Password</label>
-									</div>
-								
-								
-									<div class="checkbox mb-3">
-
-									</div>
-									<div class="container">
-											<div class="row">
-												<div class="col">
-														<button class="btn btn-lg btn-primary btn-block" (click)="emaillogin()" >Log in</button>
-													</div>
-												<div class="col">
-														<button class="btn btn-lg btn-primary btn-block" (click)="signup()">Sign-up with email</button>
+<div></div>
+<body style="text-align:center; ">
+	<mat-grid-list style= "background:rgba(220, 187, 240, 0.5);" 
+	[cols]="breakpoint" rowHeight="600px"  (window:resize)="onResize($event)">
+			<mat-grid-tile  >
+					<div class="container">
+							<div class=" loginform">
+									<form [formGroup]="form" class="form-signin">
+											<div class="text-center mb-4">
+												<h1 class="h3 mb-3 login-title">Login with Email</h1>
+												<p></p>
+											</div>
+											
+											<mat-form-field class="input"[floatLabel]="auto">
+												<mat-label *ngIf="!email.touched || !email.invalid">Email Address</mat-label>
+													<mat-label *ngIf="email.touched && email.invalid" >
+														<mat-label *ngIf= "email.errors.required">Email is required</mat-label>
+														<mat-label *ngIf= "email.errors.email && !email.value.length==0">Email is invalid</mat-label>
+									
+												</mat-label>
+												<input 	matInput 
+														formControlName="email" 
+														type="email" 
+														id="inputEmail" 
+														class="form-control" 
+														placeholder="example@email.com"
+														required
+														ng-focus="focused = true" ng-blur="focused = false">
+														
+											</mat-form-field>
+										<br>
+										
+											<mat-form-field class="input" [floatLabel]="auto">
+													<mat-label *ngIf="!password.touched || !password.invalid">Password</mat-label>
+													<mat-label *ngIf="password.touched && password.invalid" >
+															<mat-label *ngIf= "password.errors.required">Password is required</mat-label>
+															<mat-label *ngIf= "password.errors.cannotContainSpace">Password can not contain space.</mat-label>
+															<mat-label *ngIf="password.errors.minlength">Password should be minimum {{password.errors.minlength.requiredLength}} characters</mat-label>
+													</mat-label>
+												<input 	matInput
+														formControlName="password"
+														type="password" 
+														id="inputPassword" 
+														class="form-control" 
+														placeholder="Password" 
+														required>
+		
+											</mat-form-field>
+										
+		
+											<div class="container">
+													<div class="row">
+														<div class="col">
+																<button mat-raised-button mat-lg color="primary" (click)="emaillogin()" >Log in</button>
+															</div>
+														<div class="col">
+																<button mat-raised-button mat-lg color="accent" (click)="signup()">Register</button>
+															</div>
 													</div>
 											</div>
-									</div>
-									<p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2018</p>
-								</form>
-
-					</div>
+											<div id="resetpassword">
+													<button mat-stroked-button color="accent" *ngIf="!passReset && email.valid && !mailloading "  (click)="resetPassword()">Reset Password for {{email.value}}</button>
+													<mat-progress-bar *ngIf= "mailloading" mode="buffer"></mat-progress-bar>
+													<button mat-stroked-button color="warn" *ngIf="passReset" >Reset requested. Check your email instructions.</button>
 		
-		</div>
+											</div>
+											
+											<p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2018</p>
+										</form>
+		
+							</div>
+				</div>
+
+			</mat-grid-tile>
+
+			<mat-grid-tile class ="fbg-signin" >
+					<div class="container text-center mb-4">
+							<p style = "color:gray ">or sign in with.</p>
+
+					<div *ngIf = "!(authService.user | async)" class="btn-group">
+							<a class='btn btn-danger btn-lg disabled'><i class="fa fa-google-plus" style="width:16px; height:20px"></i></a>
+							<a class='btn btn-danger btn-lg ' (click)='glogin()'  style="width:12em;"> Sign in with Google</a>
+						</div>
+					<mat-divider></mat-divider>
+					<div *ngIf = "!(authService.user | async)" class="btn-group">
+							<a class='btn btn-primary btn-lg disabled'><i class="fa fa-facebook" style="width:16px; height:20px"></i></a>
+							<a class='btn btn-primary btn-lg ' (click)='login()'  style="width:12em"> Sign in with Facebook</a>
+						</div>	
+						<br /><br />
+					</div>
+			</mat-grid-tile>
+
+	</mat-grid-list>
+
+
+		
   
   <br>
 

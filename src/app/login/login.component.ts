@@ -11,6 +11,11 @@ import { UsernameValidators } from '../validators/username.validators';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  passReset = false;
+  breakpoint: number;
+  mailloading = false;
+
+
 
   form = new FormGroup({
     email: new FormControl('', [
@@ -19,7 +24,7 @@ export class LoginComponent implements OnInit {
     ]),
     password: new FormControl('', [
       Validators.required,
-      Validators.minLength(8),
+      Validators.minLength(6),
       UsernameValidators.cannotContainSpace
     ])
   });
@@ -36,8 +41,14 @@ export class LoginComponent implements OnInit {
   constructor(public authService: AuthService,  private _router: Router) {
   }
   ngOnInit() {
-  }
+    this.breakpoint = (window.innerWidth <= 1000) ? 1 : 2;
+    console.log(this.form);
 
+  }
+  onResize(event) {
+    this.breakpoint = (event.target.innerWidth <= 1000) ? 1 : 2;
+
+  }
   emaillogin() {
     this.authService.login( this.form.value.email, this.form.value.password);
     this.authService.user.subscribe(user => {
@@ -47,6 +58,7 @@ export class LoginComponent implements OnInit {
     });
   }
   signup() {
+    if (this.form.valid) {
     this.authService.signup(this.form.value.email, this.form.value.password);
     this.form.value.email = this.form.value.password = '';
     this.authService.user.subscribe(user => {
@@ -54,6 +66,8 @@ export class LoginComponent implements OnInit {
         this._router.navigate(['/profile']);
       }
     });
+    return;
+   } console.log('make sure all field is valid');
   }
   login() {
     this.authService.facebooklogin();
@@ -75,5 +89,13 @@ export class LoginComponent implements OnInit {
       }
     });
 
+  }
+
+  resetPassword() {
+    this.mailloading = true;
+    this.authService.resetPassword(this.form.value.email)
+    .then(() => {
+      this.passReset = true;
+      this.mailloading = false; });
   }
 }

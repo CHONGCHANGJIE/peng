@@ -1,82 +1,50 @@
-:root {
-    --input-padding-x: 10px;
-    --input-padding-y: 10px;
-  }
-  
-  
-  .form-signin {
+
+.form-signin {
     width: 100%;
+    height: 450px;
     max-width: 420px;
     padding: 15px;
     margin: auto;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);  
   }
   
-  .form-label-group {
-    position: relative;
-    margin-bottom: 1rem;
-  }
-  
-  .form-label-group > input,
-  .form-label-group > label {
-    padding: 10px 10px
-    
-    /* var(--input-padding-y) var(--input-padding-x); */
-  }
-  
-  .form-label-group > label {
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: block;
-    width: 100%;
-    margin-bottom: 0; /* Override default `<label>` margin */
-    line-height: 1;
-    color: #495057;
-    border: 1px solid transparent;
-    border-radius: .25rem;
-    transition: all .1s ease-in-out;
-  }
-  
-  .form-label-group input::-webkit-input-placeholder {
-    color: transparent;
-  }
-  
-  .form-label-group input:-ms-input-placeholder {
-    color: transparent;
-  }
-  
-  .form-label-group input::-ms-input-placeholder {
-    color: transparent;
-  }
-  
-  .form-label-group input::-moz-placeholder {
-    color: transparent;
-  }
-  
-  .form-label-group input::placeholder {
-    color: transparent;
-    padding-top: 20px;
-    padding-bottom: 20px;
-  }
-  
-  .form-label-group input:not(:placeholder-shown) {
-    padding-top: 13px;
-    /* calc(var(--input-padding-y) + var(--input-padding-y) * (2 / 3)); */
-    padding-bottom: 13px;
-    /* calc(var(--input-padding-y) / 3); */
-  }
-  
-  .form-label-group input:not(:placeholder-shown) ~ label {
-    padding-top: 3.33px;
-    /* calc(var(--input-padding-y) / 3); */
-    padding-bottom: 3.33px;
-    /* calc(var(--input-padding-y) / 3); */
-    font-size: 12px;
-    color: #777;
-  }
+.login-title{
+  font-style: oblique;
+}
+ 
+.input {
+  width: 100%;
+}
 
-.loginform{
+button {
+  margin-bottom: 10px;
+}
 
-    
+.btn {
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
 
+.fbg-signin{
+  font-family: fantasy;
+  background: rgb(144, 238, 144, 0.4); 
+  background-image: url('/assets/images/fog.jpg');
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+[mat-raised-button][mat-lg] {
+  font-size: 15px;
+  height: 50px;
+  width: 150px;
+  text-align: center;
+
+}
+
+#resetpassword{
+  display: inline;
 }

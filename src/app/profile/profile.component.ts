@@ -12,6 +12,7 @@ export class ProfileComponent implements OnInit {
   photoURL;
   isLoading = true;
 
+
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
@@ -21,6 +22,7 @@ export class ProfileComponent implements OnInit {
         this.username = user.displayName;
         this.photoURL = user.photoURL;
         this.isLoading = false;
+        this.authService.loggedIn.next(true);
         return;
       }
       this.username = null;

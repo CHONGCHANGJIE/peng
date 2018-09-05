@@ -93,5 +93,13 @@ export class AuthService {
       }
     });
   }
+
+    resetPassword(email: string) {
+      return this.af
+      .auth
+      .sendPasswordResetEmail(email)
+      .then(() => console.log('email sent'))
+      .catch((error) => console.log(error));
+    }
 }
 

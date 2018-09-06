@@ -17,16 +17,18 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.isLoading = true;
+
     this.authService.user.subscribe(user => {
       if (user) {
         this.username = user.displayName;
         this.photoURL = user.photoURL;
-        this.isLoading = false;
+        setTimeout(() => {this.isLoading = false; } , 2000);
         this.authService.loggedIn.next(true);
         return;
       }
       this.username = null;
       this.photoURL = null;
+      this.authService.loggedIn.next(false);
 
 
     });

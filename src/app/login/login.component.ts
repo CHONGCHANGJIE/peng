@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
 import { UsernameValidators } from '../validators/username.validators';
+import { ToastService } from '../services/toast.service';
 
 
 @Component({
@@ -38,7 +39,8 @@ export class LoginComponent implements OnInit {
 
 
 
-  constructor(public authService: AuthService,  private _router: Router) {
+  constructor(public authService: AuthService,  private _router: Router, private toast: ToastService
+  ) {
   }
   ngOnInit() {
     this.breakpoint = (window.innerWidth <= 1000) ? 1 : 2;
@@ -68,6 +70,7 @@ export class LoginComponent implements OnInit {
     });
     return;
    } console.log('make sure all field is valid');
+      this.toast.sendMessage('Make sure all field is valid', 'info', 'make sure all field is valid');
   }
   login() {
     this.authService.facebooklogin();

@@ -7,7 +7,6 @@
     overflow: hidden;
     background : radial-gradient(circle, rgb(14, 1, 31,0.3), rgba(248, 244, 244, 0.2));
 
-
 }
 
 
@@ -16,11 +15,10 @@
     border-radius: 50%;
     width: 8em;
     height: 8em;
-    display: block;
-    position: absolute;
-    top: 50%;
-    left: 45%;
-    margin-top: -4.05em;
-
+    /* display: block; */
+    /* position: absolute; */
+    /* margin-top: -4.05em; */
+    margin: auto;
+    margin-top: 200px;
 
 }

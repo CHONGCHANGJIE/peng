@@ -1,8 +1,10 @@
 <div class= "loading"  *ngIf="isLoading">
     <mat-spinner class ="loader"> </mat-spinner>
   </div>
+<div style= "height: 500px" *ngIf="isLoading"></div>
 
 <div class="jumbotron" *ngIf="!isLoading">
+    
     <div class="alert alert-primary" role="alert">
         You are now login as {{ (authService.user | async)?.email }}
       </div>

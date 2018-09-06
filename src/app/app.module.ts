@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { TopbarComponent } from './topbar/topbar.component';
+import { FooterComponent } from './footer/footer.component';
 import { ExchangeuiComponent } from './exchangeui/exchangeui.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -22,18 +22,22 @@ import { environment } from '../environments/environment';
 import { ProfileComponent } from './profile/profile.component';
 import { LoadingSpinnerComponent } from './item/ui/loading-spinner/loading-spinner.component';
 import { AuthService } from './services/auth.service';
+import { ReversePipe } from './item/pipe/reverse/reverse.pipe';
+import { ToastMessageComponent } from './toast-message/toast-message.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     NavbarComponent,
-    TopbarComponent,
+    FooterComponent,
     ExchangeuiComponent,
     LoginComponent,
     HelpComponent,
     ProfileComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    ReversePipe,
+    ToastMessageComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,3 @@
-
 <div style="text-align:center; ">
 	<mat-grid-list [cols]="breakpoint" rowHeight="600px" (window:resize)="onResize($event)">
 		<mat-grid-tile class="e-signin">
@@ -29,7 +28,8 @@
 								<mat-label *ngIf="password.errors.required">Password is required</mat-label>
 								<mat-label *ngIf="password.errors.cannotContainSpace">Password can not contain space.</mat-label>
 								<mat-label *ngIf="password.errors.minlength">Password should be minimum {{password.errors.minlength.requiredLength}}
-									characters</mat-label>
+									characters
+								</mat-label>
 							</mat-label>
 							<input matInput formControlName="password" type="password" id="inputPassword" class="form-control" placeholder="Password"
 							 required>
@@ -37,7 +37,7 @@
 
 
 						<div class="container">
-							<div class="row" >
+							<div class="row">
 								<div class="col">
 									<button mat-raised-button mat-lg color="primary" (click)="emaillogin()">Log in</button>
 								</div>
@@ -66,22 +66,23 @@
 		</mat-grid-tile>
 
 		<mat-grid-tile class="fbg-signin">
-			<div class= "fbg">
-			<h4  style="color:gray; display: inline-block">or sign in with.</h4>
-			<br>
-			<div  class="container text-center mb-4">
+			<div class="fbg">
+				<h4 style="color:gray; display: inline-block">or sign in with.</h4>
+				<br>
+				<div class="container text-center mb-4">
 
-				<div *ngIf="!(authService.user | async)" class="btn-group">
-					<a class='btn btn-danger btn-lg disabled'><i class="fa fa-google-plus" style="width:16px; height:20px"></i></a>
-					<a class='btn btn-danger btn-lg ' (click)='glogin()' style="width:12em;"> Sign in with Google</a>
+					<div *ngIf="!(authService.user | async)" class="btn-group">
+						<a class='btn btn-danger btn-lg disabled'><i class="fa fa-google-plus" style="width:16px; height:20px"></i></a>
+						<a class='btn btn-danger btn-lg ' (click)='glogin()' style="width:12em;"> Sign in with Google</a>
+					</div>
+					<mat-divider></mat-divider>
+					<div *ngIf="!(authService.user | async)" class="btn-group">
+						<a class='btn btn-primary btn-lg disabled'><i class="fa fa-facebook" style="width:16px; height:20px"></i></a>
+						<a class='btn btn-primary btn-lg ' (click)='login()' style="width:12em"> Sign in with Facebook</a>
+					</div>
+					<br /><br />
 				</div>
-				<mat-divider></mat-divider>
-				<div *ngIf="!(authService.user | async)" class="btn-group">
-					<a class='btn btn-primary btn-lg disabled'><i class="fa fa-facebook" style="width:16px; height:20px"></i></a>
-					<a class='btn btn-primary btn-lg ' (click)='login()' style="width:12em"> Sign in with Facebook</a>
-				</div>
-				<br /><br />
-			</div></div>
+			</div>
 		</mat-grid-tile>
 
 	</mat-grid-list>

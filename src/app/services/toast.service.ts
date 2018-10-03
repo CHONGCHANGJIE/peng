@@ -14,7 +14,7 @@ export class ToastService {
   constructor(private db: AngularFireDatabase) { }
 
   getMessages() {
-    return this.db.list('/messages',  ref => ref.limitToLast(5).orderByKey())
+    return this.db.list('/messages',  ref => ref.limitToLast(2).orderByKey())
     .snapshotChanges()
     .pipe(map(changes => changes.map(c => ({key: c.payload.key, ...c.payload.val() } ))));
   }

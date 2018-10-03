@@ -1,7 +1,10 @@
   
-  .jumbotron {  
+.jumbotron {  
     background-image: url('/assets/example/background.jpg');
     background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
     
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     margin-top: 5px;
@@ -9,6 +12,9 @@
     font-stretch: extra-condensed;
 }
 
+.col-sm-6.card{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);  
+}
 .bg-info{
   color: bisque;
   font-family: georgia;

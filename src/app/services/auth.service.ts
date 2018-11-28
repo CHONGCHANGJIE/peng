@@ -42,7 +42,7 @@ export class AuthService {
      }
 
   issignedIn() {
-    console.log(this.authState);
+    // console.log(this.authState);
     return (this.authState !== undefined);
   }
 

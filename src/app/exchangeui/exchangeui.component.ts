@@ -2,7 +2,10 @@ import { Component, OnInit, OnChanges } from '@angular/core';
 import { FlashMessagesService} from 'angular2-flash-messages';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
 import { DataService } from '../data.service';
-import {combineLatest } from 'rxjs';
+import { combineLatest } from 'rxjs';
+import { AuthService } from './../services/auth.service';
+import { Router} from '@angular/router';
+import { TransactionService } from '../services/transaction.service';
 
 
 
@@ -17,6 +20,7 @@ export class ExchangeuiComponent implements OnInit {
   myr: number;
   twd: number;
   myrtwd: any ;
+  checkId: string;
 
 
   form = new FormGroup({
@@ -32,7 +36,10 @@ export class ExchangeuiComponent implements OnInit {
     {value: 'tw-my', viewValue: 'Malaysia Ringgit'}
   ];
   constructor(private flashMessage: FlashMessagesService,
-              private data: DataService) {}
+              private data: DataService,
+              private _router: Router,
+              private authService: AuthService,
+              private transactionService: TransactionService) {}
 
 
   ngOnInit() {
@@ -77,8 +84,9 @@ export class ExchangeuiComponent implements OnInit {
   submit() {
 
     const check = {
-      currencyselection: this.form.value.currencyselection,
-      exchangeamount: this.form.value.exchangeamount,
+      currency: this.form.value.currencyselection.value,
+      quantity: this.form.value.exchangeamount,
+      status: "active"
     };
 
     console.log(this.form);
@@ -89,5 +97,18 @@ export class ExchangeuiComponent implements OnInit {
       this.flashMessage.grayOut(false);
       return false;
     }
+    this.authService.user.subscribe(user => {
+      if(user) { 
+        console.log('true');
+        this.checkId= this.transactionService.createTransaction(check);
+        this._router.navigate(['/checks', this.checkId]);
+    }
+      else {console.log('Please log in ');
+      this.flashMessage.show('Please sign in ... ', { cssClass: 'alert-danger', timeout: 2000 });
+      this.flashMessage.grayOut(true);
+      this._router.navigate(['/login']);
+    }
+      
+    })
   }
 }

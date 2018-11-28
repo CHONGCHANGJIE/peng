@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { HelpComponent } from './help/help.component';
 import { AuthGuard } from './services/auth.guard';
+import { CheckComponent } from './check/check.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,12 @@ const routes: Routes = [
     component: ProfileComponent,
     canActivate: [AuthGuard]
   },
+  {
+    path:'checks/:checkId',
+    component: CheckComponent,
+    canActivate: [AuthGuard]
+  }
+  ,
   {
     path: 'login',
     component: LoginComponent

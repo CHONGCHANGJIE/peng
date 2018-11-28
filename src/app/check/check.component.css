@@ -1,0 +1,29 @@
+.term {
+    width: 60%;
+    display: inline-block;
+    
+}
+
+.cart {
+    width: 30%;
+    float: right;
+}
+
+/* .form-signin {
+    width: 100%;
+    height: 400px;
+    padding: 15px;
+    margin: auto;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);  
+    
+  } */
+  
+.login-title{
+  font-family: cursive ;
+}
+ 
+.input {
+  width: 100%;
+}

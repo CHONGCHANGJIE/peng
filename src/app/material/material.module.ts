@@ -17,7 +17,8 @@ import {
   MatToolbarModule,
   MatGridListModule,
   MatDividerModule,
-  MatProgressBarModule
+  MatProgressBarModule,
+  MatTableModule
 } from '@angular/material';
 
 
@@ -41,7 +42,8 @@ import {
     MatGridListModule,
     MatButtonModule,
     MatDividerModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatTableModule
 
 
   ],
@@ -63,7 +65,8 @@ import {
     MatGridListModule,
     MatButtonModule,
     MatDividerModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatTableModule
   ],
   declarations: []
 })

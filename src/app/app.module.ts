@@ -24,6 +24,7 @@ import { LoadingSpinnerComponent } from './item/ui/loading-spinner/loading-spinn
 import { AuthService } from './services/auth.service';
 import { ReversePipe } from './item/pipe/reverse/reverse.pipe';
 import { ToastMessageComponent } from './toast-message/toast-message.component';
+import { CheckComponent } from './check/check.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ToastMessageComponent } from './toast-message/toast-message.component';
     ProfileComponent,
     LoadingSpinnerComponent,
     ReversePipe,
-    ToastMessageComponent
+    ToastMessageComponent,
+    CheckComponent
   ],
   imports: [
     BrowserModule,

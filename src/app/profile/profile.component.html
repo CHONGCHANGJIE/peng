@@ -9,5 +9,27 @@
         You are now login as {{ (authService.user | async)?.email }}
       </div>
     
-    <img src="{{photoURL}}" style =" width: 30%"class="rounded mx-auto d-block" alt="...">
+    <!-- <img src="{{photoURL}}" style =" width: 30%"class="rounded mx-auto d-block" alt="..."> -->
+
+    <a routerLink="">Proceed to exchange</a>
+    <br>
+
+    <mat-toolbar>Transactions History</mat-toolbar>
+
+      <mat-divider></mat-divider>
+    <div id="one" >
+      <div id="two" *ngFor="let transaction of transactions | async ">
+        <a href="/">ID: {{ transaction.key }}</a>
+
+        <div class="status">{{transaction.status}}</div>
+
+        <ul>
+          <li>Amount: {{ transaction.quantity }}</li>
+          <li>Date : {{ transaction.timestamp}}</li>
+          <li>Exchange currency: {{ transaction.currency }}</li>
+
+        </ul>
+      </div>
+    </div>
 </div>
+

@@ -22,3 +22,45 @@
     margin-top: 200px;
 
 }
+
+#one {
+    perspective:1000px;
+}
+
+#one #two {
+    display: block;
+    border-radius: 10px;
+    padding: 15px;
+    transform: scale3d(1,1,1);
+    transition: transform .4s ease-out;
+    background: #99edf3;
+
+
+}
+#one #two > ul > li {
+ list-style-type: disc;
+}   
+
+
+/* #one #two > ul > li {
+    background: #99edf3;
+
+} */
+
+#one #two:hover{
+    transform: scale3d(1.03,1.05,1.05);
+    transition: transform .4s ease-out;
+    background: #99aef3;
+
+}
+
+table {
+    width: 100%;
+  }
+
+
+  #one #two .status {
+    float: right;
+    color: blueviolet;
+
+}

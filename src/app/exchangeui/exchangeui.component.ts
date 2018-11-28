@@ -21,6 +21,7 @@ export class ExchangeuiComponent implements OnInit {
   twd: number;
   myrtwd: any ;
   checkId: string;
+  exchangerate: number;
 
 
   form = new FormGroup({
@@ -78,15 +79,22 @@ export class ExchangeuiComponent implements OnInit {
     this.defaultcurrency = this.currencyselections[0];
     this.form.get('currencyselection').setValue(this.defaultcurrency);
     this.form.get('exchangeamount').setValue(this.defaultamount);
+    
   }
 
 
   submit() {
-
+    if (this.form.value.currencyselection.value=="my-tw") {
+      this.exchangerate = this. myrtwd } else {
+        this.exchangerate = this. twdmyr
+      }
     const check = {
       currency: this.form.value.currencyselection.value,
       quantity: this.form.value.exchangeamount,
-      status: "active"
+      status: "active",
+      rate: this.exchangerate,
+      payamount: this.exchangerate*this.form.value.exchangeamount,
+      active: "true"
     };
 
     console.log(this.form);

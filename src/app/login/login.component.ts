@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
     this.authService.login( this.form.value.email, this.form.value.password);
     this.authService.user.subscribe(user => {
       if (user) {
-        this._router.navigate(['/profile']);
+        this._router.navigate(['/profile/transaction']);
       }
     });
   }
@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
     this.form.value.email = this.form.value.password = '';
     this.authService.user.subscribe(user => {
       if (user) {
-        this._router.navigate(['/profile']);
+        this._router.navigate(['/profile/transaction']);
       }
     });
     return;
@@ -77,7 +77,7 @@ export class LoginComponent implements OnInit {
 
     this.authService.user.subscribe(user => {
       if (user) {
-        this._router.navigate(['/profile']);
+        this._router.navigate(['/profile/transaction']);
       }
     });
 
@@ -88,7 +88,7 @@ export class LoginComponent implements OnInit {
     this.authService.googlelogin();
     this.authService.user.subscribe(user => {
       if (user) {
-        this._router.navigate(['/profile']);
+        this._router.navigate(['/profile/transaction']);
       }
     });
 

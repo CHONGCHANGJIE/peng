@@ -1,29 +1,19 @@
-import { AuthService } from './../services/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from './../services/auth.service';
 import { TransactionService } from '../services/transaction.service';
 
-
-
-
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  selector: 'app-transaction',
+  templateUrl: './transaction.component.html',
+  styleUrls: ['./transaction.component.css']
 })
-export class ProfileComponent implements OnInit {
-  username;
-  photoURL;
+export class TransactionComponent implements OnInit {
   isLoading = true;
+  username;
   transactions : any;
 
-  links = [ {label: 'Transactions History',
-              path: 'transaction'},
-            {label: 'User Infomation',
-              path: 'user'}];
-
-
-  constructor(private authService: AuthService,
-              private transactionService: TransactionService) { }
+  constructor( private authService: AuthService,
+                private transactionService: TransactionService) { }
 
   ngOnInit() {
     this.isLoading = true;
@@ -44,7 +34,6 @@ export class ProfileComponent implements OnInit {
     });
 
     this.transactions = this.transactionService.getTransactionList();
-  
+  }
 
-}
 }

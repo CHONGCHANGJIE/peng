@@ -54,8 +54,9 @@ export class TransactionService {
 
 
   deleteTransaction(transactionKey){
-    this.db.object(`transactions/${this.userId}/${transactionKey}`).update({"status": "cancelled"});
+    this.db.object(`transactions/${this.userId}/${transactionKey}`).update({"status": "pending", "active": false});
   }
+  
   }
 
 

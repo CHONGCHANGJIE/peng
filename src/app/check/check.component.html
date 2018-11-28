@@ -1,73 +1,106 @@
+<div class="jumbotron container">
 
-<div class="jumbotron container" >
-  <div class= "term">
-    <h3>Transaction ID : {{check.$key}}</h3>
-    <form [formGroup]= "form" class="was-validated form-signin">
-      <div class="custom-control custom-checkbox mb-3">
-        <input type="checkbox" class="custom-control-input" id="customControlValidation1" required>
-        <label class="custom-control-label" for="customControlValidation1">Check this custom checkbox</label>
-        <div class="invalid-feedback">Example invalid feedback text</div>
-      </div>
-  
-      <div class="custom-control custom-radio">
-        <input type="radio" class="custom-control-input" id="customControlValidation2" name="radio-stacked" required>
-        <label class="custom-control-label" for="customControlValidation2">Toggle this custom radio</label>
-      </div>
-      <div class="custom-control custom-radio mb-3">
-        <input type="radio" class="custom-control-input" id="customControlValidation3" name="radio-stacked" required>
-        <label class="custom-control-label" for="customControlValidation3">Or toggle this other custom radio</label>
-        <div class="invalid-feedback">More example invalid feedback text</div>
-      </div>
-  
-      <div class="form-group">
-        <select class="custom-select" required>
-          <option value="">Select bank to be paid</option>
-          <option value="1">BANK ABC</option>
-          <option value="2">BANK XYZ</option>
-          <option value="3">BANK 666</option>
-        </select>
-        <div class="invalid-feedback">Example invalid custom select feedback</div>
-      </div>
-    
-      <mat-form-field class="input" [floatLabel]="always">
+  <form [formGroup]="form" (ngSubmit)="checkout()" class="was-validated form-signin">
+    <div class="row">
+        <mat-toolbar>Transaction ID: {{check.$key}}</mat-toolbar>
+
+      <div class="col-md-7">
+          <br>
+          <mat-divider></mat-divider>
+          <br>
+        <h6>Please transfer        
+          <span *ngIf= "check.currency=='my-tw'">  RM</span>
+          <span *ngIf= "check.currency=='tw-my'">  NTD</span>
+          {{check.payamount | number: '1.2-2'}} to the following bank account with Reference No : {{check.$key}}
+        </h6>
+        <mat-card *ngIf= "check.currency=='my-tw'" style= "max-width: 200px;">
+          <span class="flag-icon flag-icon-my flag-icon-squared"></span>
+          <mat-card-content></mat-card-content>
+
+        </mat-card>
+        <mat-card *ngIf= "check.currency=='tw-my'" style= "max-width: 200px;">
+            <span class="flag-icon flag-icon-tw flag-icon-squared"></span>
+            <mat-card-content></mat-card-content>
+          </mat-card>
+        <div class="custom-control custom-checkbox mb-3">
+          <input type="checkbox" class="custom-control-input" id="customControlValidation1" required>
+          <label class="custom-control-label" for="customControlValidation1">Check here to indicate that you have read and agree to the </label>
+          <div class="invalid-feedback"><a style= "text-decoration: underline" href="https://www.google.com" target = "_blank">Terms & Conditions Agreement</a></div>
+        </div>
+
+        <div class="custom-control custom-radio">
+          <input type="radio" class="custom-control-input" id="customControlValidation2" name="radio-stacked" required>
+          <label class="custom-control-label" for="customControlValidation2">Yes, please use e-mail to send me information.</label>
+        </div>
+        <div class="custom-control custom-radio mb-3">
+          <input type="radio" class="custom-control-input" id="customControlValidation3" name="radio-stacked" required>
+          <label class="custom-control-label" for="customControlValidation3">Please do not send me information.</label>
+          <div class="invalid-feedback">May we send you updates using e-mail?</div>
+        </div>
+
+        <div class="form-group">
+          <select class="custom-select" required>
+            <option value="">New Payment...</option>
+            <option value="1">BANK ABC</option>
+            <option value="2">BANK XYZ</option>
+            <option value="3">BANK 666</option>
+          </select>
+          <div class="invalid-feedback">
+            Select recipient bank from
+            <span *ngIf= "check.currency=='tw-my'"><span class="flag-icon flag-icon-my flag-icon-squared"></span>  Malaysia</span>
+            <span *ngIf= "check.currency=='my-tw'"><span class="flag-icon flag-icon-tw flag-icon-squared"></span>  Taiwan</span>  
+          </div>
+        </div>
+
+        <mat-form-field class="input" [floatLabel]="always">
           <mat-label *ngIf="!account.touched || !account.invalid">Account</mat-label>
           <mat-label *ngIf="account.touched && account.invalid">
             <mat-label *ngIf="account.errors.required">this field is required</mat-label>
             <mat-label *ngIf="account.errors.cannotContainSpace"> can not contain space.</mat-label>
-            <mat-label *ngIf="account.errors.minlength">Account No. should be minimum {{account.errors.minlength.requiredLength}}
+            <mat-label *ngIf="account.errors.minlength">Account No. should be minimum
+              {{account.errors.minlength.requiredLength}}
               characters
             </mat-label>
           </mat-label>
           <input matInput formControlName="account" type="text" id="account" class="form-control" placeholder="Account No."
-          required>
-      </mat-form-field>
+            required>
+        </mat-form-field>
 
-  
-      <div class="custom-file">
-        <input type="file" class="custom-file-input" id="validatedCustomFile" (change)="upload($event)" accept=".png,.jpg" required>
-        <!-- <progress max="100" [value]="(uploadProgress | async)"></progress> -->
-        <div class="progress">
-            <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width]="(uploadProgress | async) + '%'" [attr.aria-valuenow]="(uploadProgress | async)" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-        <div class="btn-group" role="group" *ngIf="uploadState | async; let state">
+
+        <div class="custom-file">
+          <input type="file" class="custom-file-input" id="validatedCustomFile" (change)="upload($event)" accept=".png,.jpg"
+            required>
+          <!-- <progress max="100" [value]="(uploadProgress | async)"></progress> -->
+          <label class="custom-file-label" for="validatedCustomFile">Upload your payment receipt</label>
+          <div class="invalid-feedback">Example invalid custom file feedback</div>
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width]="(uploadProgress | async) + '%'"
+              [attr.aria-valuenow]="(uploadProgress | async)" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <div class="btn-group" role="group" *ngIf="uploadState | async; let state">
             <button type="button" class="btn btn-primary" (click)="task.pause()" [disabled]="state === 'paused'">Pause</button>
             <button type="button" class="btn btn-primary" (click)="task.cancel()" [disabled]="!(state === 'paused' || state === 'running')">Cancel</button>
             <button type="button" class="btn btn-primary" (click)="task.resume()" [disabled]="state === 'running'">Resume</button>
-        </div>
-        <div *ngIf="downloadURL | async; let downloadSrc" class="alert alert-info" role="alert">
+          </div>
+          <br>
+          <div *ngIf="downloadURL | async; let downloadSrc" class="alert alert-info" role="alert">
             File uploaded: <a [href]="downloadSrc">{{downloadSrc}}</a>
-        </div>
-        <label class="custom-file-label" for="validatedCustomFile">Upload your payment receipt</label>
-        <div class="invalid-feedback">Example invalid custom file feedback</div>
-      </div>
-    </form>
-  </div>
+          </div>
 
-   <div  class ="cart">
-      <ul class="list-group mb-3">
+          <br>
+        </div>
+      </div>
+
+      <div class="col-md-5">
+          <br>
+          <mat-divider></mat-divider>
+          <br>
+        <ul class="list-group mb-3">
+
           <h3>Summary</h3>
+          <mat-divider></mat-divider>
           <li class="list-group-item d-flex justify-content-between lh-condensed">
-            
+
             <div>
               <h6 class="my-0">Order Details </h6>
               <small class="text-muted">Exchange Currency</small>
@@ -77,23 +110,37 @@
           <li class="list-group-item d-flex justify-content-between lh-condensed">
             <div>
               <h6 class="my-0">Sending Amount</h6>
-              <small class="text-muted">to be paid</small>
+              <small class="text-success">to be paid</small>
             </div>
-            <span class="text-muted">{{check.quantity}}</span>
+            <strong class="text-success">
+                <span *ngIf= "check.currency=='my-tw'"><span class="flag-icon flag-icon-my flag-icon-squared"></span>  RM</span>
+                <span *ngIf= "check.currency=='tw-my'"><span class="flag-icon flag-icon-tw flag-icon-squared"></span>  NTD</span>
+              {{check.payamount | number: '1.2-2'}}</strong>
           </li>
-          
+
           <li class="list-group-item d-flex justify-content-between bg-light">
-            <div class="text-success">
+            <div class="text-muted">
               <h6 class="my-0">Receiving Amount</h6>
               <small>to receive</small>
             </div>
-            <span class="text-success">RM 135</span>
+            <span class="text-muted">          
+                <span *ngIf= "check.currency=='tw-my'"><span class="flag-icon flag-icon-my flag-icon-squared"></span>  RM</span>
+                <span *ngIf= "check.currency=='my-tw'"><span class="flag-icon flag-icon-tw flag-icon-squared"></span>  NTD</span>
+                {{check.quantity | number: '1.2-2'}}</span>
+            
           </li>
           <li class="list-group-item d-flex justify-content-between">
             <span>exchange rates</span>
-            <strong>0.135</strong>
+            <strong>{{check.rate | number: '1.3-3'}}</strong>
           </li>
         </ul>
-    </div>
-  </div>
 
+        <button mat-raised-button color="primary" type="submit">Confirm Payment & Check Out</button>
+
+      </div>
+
+    </div>
+  </form>
+  <button style = "float: right" mat-raised-button (click)="cancel()">Cancel</button>
+
+</div>

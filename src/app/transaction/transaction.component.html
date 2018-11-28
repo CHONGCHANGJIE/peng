@@ -1,0 +1,16 @@
+
+
+<mat-divider></mat-divider>
+<div id="one" >
+  <div id="two" *ngFor="let transaction of transactions | async  ">
+    <a href="/">ID: {{ transaction.key }}</a>
+
+    <div class="status">{{transaction.status}}</div>
+
+    <ul>
+      <li>Amount: {{ transaction.quantity }}</li>
+      <li>Date : {{ transaction.timestamp}}</li>
+      <li>Exchange currency: {{ transaction.currency }}</li>
+
+    </ul>
+  </div>

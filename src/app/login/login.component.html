@@ -46,7 +46,7 @@
 								</div>
 							</div>
 						</div>
-						<app-toast-message></app-toast-message>
+						
 
 						<div id="resetpassword">
 							<button mat-stroked-button color="accent" *ngIf="!passReset && email.valid && !mailloading " (click)="resetPassword()">Reset
@@ -55,7 +55,7 @@
 							<button mat-stroked-button color="warn" *ngIf="passReset">Reset requested. Check your email instructions.</button>
 
 						</div>
-
+						<app-toast-message></app-toast-message>
 					</form>
 					<p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2018</p>
 

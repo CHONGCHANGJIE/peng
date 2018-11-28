@@ -1,35 +1,25 @@
-<div class= "loading"  *ngIf="isLoading">
-    <mat-spinner class ="loader"> </mat-spinner>
-  </div>
-<div style= "height: 500px" *ngIf="isLoading"></div>
 
-<div class="jumbotron" *ngIf="!isLoading">
-    
-    <div class="alert alert-primary" role="alert">
-        You are now login as {{ (authService.user | async)?.email }}
-      </div>
-    
+    <div class= "loading"  *ngIf="isLoading">
+        <mat-spinner class ="loader"> </mat-spinner>
+    </div>
+    <div style= "height: 500px" *ngIf="isLoading"></div>
+    <div class="jumbotron" *ngIf="!isLoading">
+
+    <button mat-raised-button color="primary" routerLink="" >Proceed to exchange</button>
+    <br>
+    <mat-toolbar class="alert alert-primary" role="alert"> You are now login as {{ (authService.user | async)?.email }}</mat-toolbar>
+
+
+    <nav mat-tab-nav-bar [backgroundColor]="primary">
+        <a mat-tab-link *ngFor="let link of links "
+          [routerLink]="link.path"
+          routerLinkActive #rla="routerLinkActive"
+          [active]=" rla.isActive">
+          {{link.label}}</a>        
+      </nav>
+
+      <router-outlet></router-outlet>
     <!-- <img src="{{photoURL}}" style =" width: 30%"class="rounded mx-auto d-block" alt="..."> -->
 
-    <a routerLink="">Proceed to exchange</a>
-    <br>
 
-    <mat-toolbar>Transactions History</mat-toolbar>
-
-      <mat-divider></mat-divider>
-    <div id="one" >
-      <div id="two" *ngFor="let transaction of transactions | async ">
-        <a href="/">ID: {{ transaction.key }}</a>
-
-        <div class="status">{{transaction.status}}</div>
-
-        <ul>
-          <li>Amount: {{ transaction.quantity }}</li>
-          <li>Date : {{ transaction.timestamp}}</li>
-          <li>Exchange currency: {{ transaction.currency }}</li>
-
-        </ul>
-      </div>
-    </div>
-</div>
-
+  </div>

@@ -1,12 +1,13 @@
 .term {
     width: 60%;
-    display: inline-block;
+    float: left;
     
 }
 
 .cart {
     width: 30%;
-    float: right;
+    float: left;
+    padding-left: 20px;
 }
 
 /* .form-signin {

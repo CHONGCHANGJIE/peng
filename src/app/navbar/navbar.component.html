@@ -10,7 +10,7 @@
     <a class="navbar-brand" href="/">PengPay</a>
     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
       <li class= "nav-item">
-          <a routerLink="profile" *ngIf="isLoggedIn$ | async" class="nav-link username"  >{{ (authService.user | async)?.email | uppercase }}<span class="sr-only"></span></a>
+          <a routerLink="profile/transaction" *ngIf="isLoggedIn$ | async" class="nav-link username"  >{{ (authService.user | async)?.email | uppercase }}<span class="sr-only"></span></a>
       </li>
       <li class="nav-item" [routerLinkActive] = "['active']"  
       [routerLinkActiveOptions]="{exact:true}"  >

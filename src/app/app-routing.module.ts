@@ -7,6 +7,8 @@ import { LoginComponent } from './login/login.component';
 import { HelpComponent } from './help/help.component';
 import { AuthGuard } from './services/auth.guard';
 import { CheckComponent } from './check/check.component';
+import { TransactionComponent } from './transaction/transaction.component';
+import { UserComponent } from './user/user.component';
 
 const routes: Routes = [
   {
@@ -16,7 +18,11 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    children: [
+      {path: 'transaction', component: TransactionComponent},
+      {path: 'user', component: UserComponent}
+    ]
   },
   {
     path:'checks/:checkId',

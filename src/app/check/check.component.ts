@@ -5,7 +5,7 @@ import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask 
 import { map, finalize } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { TransactionService } from '../services/transaction.service';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router'; 
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 import { switchMap} from 'rxjs/operators';
 
@@ -24,7 +24,7 @@ export class CheckComponent implements OnInit {
   downloadURL: Observable<string>;
   uploadState: Observable<string>;
   checkStatus: any;
-  check: object;
+  check: any;
 
   form = new FormGroup({
     account: new FormControl('', [
@@ -37,8 +37,10 @@ export class CheckComponent implements OnInit {
     return this.form.get('account');
   }
 
-  constructor( private afStorage: AngularFireStorage, private transactionService: TransactionService,
-                private route: ActivatedRoute) { }
+  constructor(private afStorage: AngularFireStorage, 
+              private transactionService: TransactionService,
+              private route: ActivatedRoute,
+              private router: Router) { }
 
   upload(event){
 
@@ -58,15 +60,27 @@ export class CheckComponent implements OnInit {
       finalize(() => this.downloadURL = this.ref.getDownloadURL())).subscribe();
   }
   ngOnInit() {
-
     
-   this.route.params.subscribe(params => {
+    this.check= this.transactionService.getTransaction("123"); 
+ 
+    this.route.params.subscribe(params => {
        this.transactionService.getTransaction(params['checkId']).subscribe(item=> {console.log(item);  this.check = item});
     });
-    this.check = this.transactionService.getTransaction("-LSJ59QQJ1znL16tFuLA")
-    console.log(this.check)
+    
   }
 
   ngOnDestroy () {
+    
+    console.log(this.check.$key);
+    this.transactionService.deleteTransaction(this.check.$key);
+  }
+
+  checkout() {
+    console.log('hello world');
+  }
+
+  cancel() {
+    console.log('trade cancelled');
+    this.router.navigate(['/'])
   }
 }

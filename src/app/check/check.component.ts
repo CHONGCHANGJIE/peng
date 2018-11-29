@@ -7,8 +7,9 @@ import { Observable } from 'rxjs';
 import { TransactionService } from '../services/transaction.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
-import { switchMap} from 'rxjs/operators';
 
+import { HttpClient} from '@angular/common/http';
+import { switchMap} from 'rxjs/operators';
 
 
 
@@ -27,6 +28,7 @@ export class CheckComponent implements OnInit {
   check: any;
   checkId: any;
   _check: any;
+  endpoint = 'https://us-central1-teepeng-9cada.cloudfunctions.net/httpEmail';
 
 
   form = new FormGroup({
@@ -43,7 +45,8 @@ export class CheckComponent implements OnInit {
   constructor(private afStorage: AngularFireStorage, 
               private transactionService: TransactionService,
               private route: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              private http: HttpClient) { }
 
   upload(event){
 
@@ -84,6 +87,11 @@ export class CheckComponent implements OnInit {
 
   checkout() {
     console.log('hello world');
+    const data= {
+      toEmail: 'jie_chong@hotmail.com',
+      toName: 'JieCHONG'  
+    }
+    return this.http.post(this.endpoint, data, {responseType: 'text'}).subscribe();
   }
 
   cancel() {

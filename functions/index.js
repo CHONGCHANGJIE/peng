@@ -1,63 +1,50 @@
 const functions = require('firebase-functions');
+
 const admin = require('firebase-admin');
-const cors = require('cors')({origin: true});
 admin.initializeApp();
 
-
 const firebaseConfig = JSON.parse(process.env.FIREBASE_CONFIG);
-
 const SENDGRID_API_KEY = functions.config().sendgrid.key;
 
 const sgMail = require('@sendgrid/mail');
-
 sgMail.setApiKey(SENDGRID_API_KEY);
 
+exports.firestoreEmail = functions.firestore
+    .document('users/{userId}/followers/{followerId}')
 
-// exports.httpEmail = functions.https.onRequest((req, res) => {
-//   if(req.method!=='POST'){
-//     const error = new Error('Only POST requests are accepted');
-//     error.code = 405;
-//     throw error;
-//   }
-//   const msg = {
+    .onCreate((snap, context) => {
 
-//     to: 'jie_chong@hotmail.com',
-  
-//     from: 'test@example.com',
-  
-//     subject: 'Sending with SendGrid is Fun',
-  
-//     text: 'and easy to do anywhere, even with Node.js',
-  
-//     html: '<strong>and easy to do anywhere, even with Node.js</strong>',
-  
-//   };
-//   return cors(req, res, ()=> {
-//     let format= req.query.format;
-//     if(!format) {format = req.body.format;}
-//     sgMail.send(msg);
-//   });
-// });
- 
+      const userId = context.params.userId;
 
-exports.httpEmail = functions.https.onRequest((request, response) => {
-  cors(request, response, () => { 
+      const db = admin.firestore()
 
-   });
-  
-        
-  const msg = {
+      return db.collection('users').doc(userId)
+               .get()
+               .then(doc => {
 
-    to: 'jie_chong@hotmail.com',
-  
-    from: 'test@example.com',
-  
-    subject: 'Sending with SendGrid is Fun',
-  
-    text: 'and easy to do anywhere, even with Node.js',
-  
-    html: '<strong>and easy to do anywhere, even with Node.js</strong>',}
+                  const user = doc.data()
 
-    sgMail.send(msg);
-  return response.send("Hello from Firebase!");
+                  const msg = {
+                      to: user.email,
+                      from: 'hello@angularfirebase.com',
+                      subject:  'New Follower',
+                      // text: `Hey ${toName}. You have a new follower!!! `,
+                      // html: `<strong>Hey ${toName}. You have a new follower!!!</strong>`,
+          
+                      // custom templates
+                      templateId: 'd-677edf0462164c588e7af0350e45682c',
+                      substitutionWrappers: ['{{', '}}'],
+                      substitutions: {
+                        name: user.displayName
+                        // and other custom properties here
+                      }
+                  };
+
+                  return sgMail.send(msg)
+              })
+              .then(() => console.log('email sent!') )
+              .catch(err => console.log(err) )
+                   
+
 });
+   

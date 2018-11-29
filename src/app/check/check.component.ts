@@ -87,11 +87,7 @@ export class CheckComponent implements OnInit {
 
   checkout() {
     console.log('hello world');
-    const data= {
-      toEmail: 'jie_chong@hotmail.com',
-      toName: 'JieCHONG'  
-    }
-    return this.http.post(this.endpoint, data, {responseType: 'text'}).subscribe();
+   
   }
 
   cancel() {

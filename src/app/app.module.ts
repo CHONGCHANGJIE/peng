@@ -27,6 +27,7 @@ import { ToastMessageComponent } from './toast-message/toast-message.component';
 import { CheckComponent } from './check/check.component';
 import { UserComponent } from './user/user.component';
 import { TransactionComponent } from './transaction/transaction.component';
+import { FilterPipe } from './item/pipe/filter/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { TransactionComponent } from './transaction/transaction.component';
     ProfileComponent,
     LoadingSpinnerComponent,
     ReversePipe,
+    FilterPipe,
     ToastMessageComponent,
     CheckComponent,
     UserComponent,

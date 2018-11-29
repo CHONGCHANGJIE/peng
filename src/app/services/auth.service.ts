@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
-import { auth } from 'firebase';
+import 'firebase/auth';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { FlashMessagesService } from 'angular2-flash-messages';
@@ -74,7 +74,7 @@ export class AuthService {
 
   facebooklogin() {
     this.af
-      .auth.signInWithPopup(new auth.FacebookAuthProvider())
+      .auth.signInWithPopup(new firebase.auth.FacebookAuthProvider())
       .then(value => {
         console.log('facebook login success!', value);
         this.loggedIn.next(true);
@@ -87,7 +87,7 @@ export class AuthService {
 
   googlelogin() {
     this.af
-      .auth.signInWithPopup(new auth.GoogleAuthProvider())
+      .auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
       .then(value => {
         console.log('facebook login success!', value);
         this.loggedIn.next(true);

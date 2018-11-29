@@ -1,5 +1,5 @@
 <div class="wrapper">
-    <aside  *ngFor="let message of messages | async | reverse">
+    <aside  *ngFor="let message of messages | async | reverse | filter">
       <div class="notification info" 
   
            [ngClass]="{'is-info':     message.style=='info',

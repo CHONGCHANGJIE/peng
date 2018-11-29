@@ -32,6 +32,13 @@ export class TransactionService {
     console.log(this.userId);
     console.log(id);
     console.log(`transactions/${this.userId}/${id}`);
+    // this.db.object(`transactions/${this.userId}/${id}`).valueChanges().subscribe( id => { 
+    //   if(id) { 
+    //     console.log("id found");
+    //   }else{
+    //     console.log("id not found");
+    //   }
+    // });
     return this.db.object(`transactions/${this.userId}/${id}`).snapshotChanges().pipe(map(action =>{
       const $key =action.payload.key;
       const data = {$key , ...action.payload.val()};
@@ -53,8 +60,12 @@ export class TransactionService {
   }
 
 
-  deleteTransaction(transactionKey){
-    this.db.object(`transactions/${this.userId}/${transactionKey}`).update({"status": "pending", "active": false});
+  deleteTransaction(transactionKey) {
+    this.db.object(`transactions/${this.userId}/${transactionKey}`).update({"active": false});
+  }
+
+  cancelTransaction(transactionKey) {
+    this.db.object(`transactions/${this.userId}/${transactionKey}`).update({"status": "cancelled"});
   }
   
   }

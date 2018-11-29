@@ -2,7 +2,7 @@
 
 <mat-divider></mat-divider>
 <div id="one" >
-  <div id="two" *ngFor="let transaction of transactions | async  ">
+  <div id="two" *ngFor="let transaction of transactions | async | reverse  ">
     <a href="/">ID: {{ transaction.key }}</a>
 
     <div class="status">{{transaction.status}}</div>

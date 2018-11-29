@@ -25,6 +25,9 @@ export class CheckComponent implements OnInit {
   uploadState: Observable<string>;
   checkStatus: any;
   check: any;
+  checkId: any;
+  _check: any;
+
 
   form = new FormGroup({
     account: new FormControl('', [
@@ -61,18 +64,22 @@ export class CheckComponent implements OnInit {
   }
   ngOnInit() {
     
-    this.check= this.transactionService.getTransaction("123"); 
- 
-    this.route.params.subscribe(params => {
-       this.transactionService.getTransaction(params['checkId']).subscribe(item=> {console.log(item);  this.check = item});
-    });
-    
+
+    // this.route.params.subscribe(params => {
+    //    this.transactionService.getTransaction(params['checkId']).subscribe(item=> {console.log(item);  this.check = item});
+    // });
+
+    this.route.params.subscribe(params=> {this.checkId = params});
+    console.log(this.checkId);
+    this.check = this.transactionService.getTransaction(this.checkId.checkId);
+    this.check.subscribe(item=>{ if(!item.active){console.log('item not found'); this.cancel();}else {this._check = item; console.log(item)}});
+       
   }
 
   ngOnDestroy () {
     
-    console.log(this.check.$key);
-    this.transactionService.deleteTransaction(this.check.$key);
+    console.log(this._check.$key);
+    this.transactionService.deleteTransaction(this._check.$key);
   }
 
   checkout() {
@@ -81,6 +88,7 @@ export class CheckComponent implements OnInit {
 
   cancel() {
     console.log('trade cancelled');
+    this.transactionService.cancelTransaction(this._check.$key);
     this.router.navigate(['/'])
   }
 }
